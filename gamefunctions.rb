@@ -8,11 +8,32 @@ require_relative ('dice.rb')
 @dice = Dice.new()
 players = [@player_one, @player_two, @player_three, @player_four]
 
-def test(players)
-  return players[0].get_position()
+
+
+def rotate_players(players)
+  counter = 0
+  win = false
+  while win == false
+    @dice = Dice.new()
+    puts players[counter].get_name()
+    puts players[counter].get_position()
+    new_pos = @dice.roll()
+    players[counter].change_position(new_pos)
+    counter += 1
+    if counter >= 4
+      counter = 0
+    end
+    if players[counter].get_position >= 100
+      win = true
+      puts "#{players[counter].get_name()} has won!"
+    end
+
+  end
 end
 
-puts test(players)
+
+rotate_players(players)
+
 
 
 
